@@ -1,59 +1,341 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Политика конфиденциальности — CityParking</title>
+  <meta charset="utf-8">
+  <title>Политика конфиденциальности — ZaharCompany / CityParking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Политика конфиденциальности приложения CityParking. Как мы обрабатываем ваши данные, права пользователя и контакты разработчика.">
+  <link rel="icon" href="favicon.png">
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;line-height:1.6;color:#222;margin:0;padding:20px;background:#f7f7f7}
-    .container{max-width:900px;margin:24px auto;background:#fff;padding:28px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
-    h1,h2,h3{color:#111;margin-top:0}
-    p{margin:0 0 12px}
-    .meta{font-size:0.95em;color:#555;margin-bottom:18px}
-    footer{font-size:0.9em;color:#666;margin-top:24px;border-top:1px solid #eee;padding-top:12px}
-    a{color:#0066cc}
+    /* Базовая тема — светлая, с поддержкой тёмной через prefers-color-scheme */
+    :root {
+      --bg: #ffffff;
+      --text: #1f2328;
+      --muted: #5e6a76;
+      --primary: #6f42c1;   /* фиолетовый фирменный */
+      --primary-weak: #f3ecff;
+      --border: #d0d7de;
+      --card: #ffffff;
+      --link: #2f81f7;
+      --success: #2da44e;
+      --warning: #bf8700;
+      --danger: #d1242f;
+      --shadow: 0 8px 30px rgba(31, 35, 40, .08);
+      --radius: 14px;
+      --maxw: 1000px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --text: #e6edf3;
+        --muted: #9aa7b2;
+        --primary: #b58cff;
+        --primary-weak: #1a1430;
+        --border: #30363d;
+        --card: #0f141a;
+        --link: #4493f8;
+        --shadow: 0 8px 30px rgba(0, 0, 0, .35);
+      }
+    }
+    /* Сброс и типографика */
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3 { line-height: 1.25; margin: 0 0 .5rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: .35rem; }
+    h3 { font-size: 1.05rem; color: var(--muted); }
+    p { margin: .5rem 0 1rem; }
+    ul, ol { margin: .25rem 0 1rem 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+
+    /* Верхняя панель */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(1.2) blur(6px);
+      background: color-mix(in oklab, var(--bg) 85%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .bar {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: .75rem 1rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: .6rem;
+      text-decoration: none;
+    }
+    .logo {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--primary), #8a5cff 55%, #4a2b8c);
+      box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--primary) 35%, #fff);
+    }
+    .brand-title {
+      font-weight: 700; letter-spacing: .2px;
+    }
+    .tag {
+      font-size: .8125rem; padding: .15rem .5rem; border-radius: 999px;
+      background: var(--primary-weak); color: var(--primary); border: 1px solid color-mix(in oklab, var(--primary) 35%, var(--border));
+    }
+    .spacer { flex: 1; }
+    .mini-nav { display: flex; gap: .75rem; align-items: center; }
+    .mini-nav a { font-size: .9rem; color: var(--muted); }
+    .mini-nav a.active { color: var(--text); font-weight: 600; }
+
+    /* Контентная область */
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 1.25rem; }
+    .hero {
+      margin: 1rem 0 1.25rem;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--primary-weak) 60%, var(--bg)), var(--card));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+      display: grid; grid-template-columns: 1.2fr .9fr; gap: 1rem;
+    }
+    .hero h1 { margin-top: .25rem; }
+    .hero p { color: var(--muted); }
+    .hero .card {
+      background: var(--card);
+      border-radius: calc(var(--radius) - 4px);
+      border: 1px solid var(--border);
+      padding: .9rem;
+    }
+    .cta {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--primary); color: #fff; border-radius: 10px;
+      padding: .55rem .9rem; font-weight: 600; border: none;
+      box-shadow: 0 10px 20px color-mix(in oklab, var(--primary) 20%, transparent);
+    }
+    .cta:hover { filter: brightness(1.05); text-decoration: none; }
+
+    /* Двухколоночная зона: оглавление + текст */
+    .layout { display: grid; grid-template-columns: 280px 1fr; gap: 1rem; align-items: start; }
+    .toc {
+      position: sticky; top: 64px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: .75rem; box-shadow: var(--shadow);
+    }
+    .toc h3 { margin: .25rem 0 .5rem; }
+    .toc ul { list-style: none; padding: 0; margin: 0; }
+    .toc li { margin: .25rem 0; }
+    .toc a { display: block; padding: .4rem .5rem; border-radius: 8px; color: var(--text); }
+    .toc a:hover { background: color-mix(in oklab, var(--primary-weak) 65%, var(--bg)); }
+
+    .content {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem;
+    }
+    .section { margin: .75rem 0 1.25rem; }
+    .note {
+      display: flex; gap: .6rem; align-items: flex-start;
+      background: color-mix(in oklab, var(--primary-weak) 80%, var(--bg));
+      border: 1px dashed color-mix(in oklab, var(--primary) 35%, var(--border));
+      color: var(--text); border-radius: 12px; padding: .75rem;
+    }
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      padding: .05rem .35rem; border: 1px solid var(--border); border-radius: 6px; background: color-mix(in oklab, var(--bg) 90%, var(--card));
+    }
+
+    /* Карточки и списки */
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .panel {
+      border: 1px solid var(--border); border-radius: 12px; padding: .75rem; background: var(--card);
+    }
+    .panel h3 { margin-bottom: .25rem; }
+    .muted { color: var(--muted); }
+
+    /* Нижний колонтитул */
+    .footer {
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+      background: var(--card);
+    }
+    .footer .inner {
+      max-width: var(--maxw); margin: 0 auto; padding: 1rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center;
+    }
+    .small { font-size: .9rem; color: var(--muted); }
+
+    /* Мобильная адаптация */
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; }
+      .layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* Печать: чистый текст без навигации */
+    @media print {
+      .header, .hero, .toc, .footer, .cta { display: none !important; }
+      .content { border: none; box-shadow: none; padding: 0; }
+      a { color: inherit; text-decoration: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Политика конфиденциальности — CityParking</h1>
-    <div class="meta">
-      <strong>Дата вступления в силу:</strong> 25.12.2025<br />
-      <strong>Разработчик:</strong> Fedorenko Zahar<br />
-      <strong>Контактный e‑mail:</strong> <a href="mailto:al.fedor3nko@gmail.com">al.fedor3nko@gmail.com</a><br />
-      <strong>Юридический адрес:</strong> Gomel' - 246029, Беларусь (BY)
+  <!-- Верхняя панель -->
+  <header class="header" role="banner">
+    <div class="bar">
+      <a class="brand" href="#top" aria-label="ZaharCompany">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="brand-title">ZaharCompany</span>
+      </a>
+      <span class="tag">Политика конфиденциальности</span>
+      <div class="spacer"></div>
+      <nav class="mini-nav" aria-label="Навигация">
+        <a href="#data">Данные</a>
+        <a href="#rights">Права</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
     </div>
+  </header>
 
-    <h2>1. Введение</h2>
-    <p>Мы, <strong>Fedorenko Zahar</strong>, уважаем вашу приватность и обязуемся защищать персональные данные пользователей мобильного приложения <strong>CityParking</strong>. В этой политике описано, какие данные мы собираем, с какой целью, как мы их используем, кому передаём, как долго храним и какие у вас есть права.</p>
+  <!-- Хиро-блок -->
+  <main id="top" class="container" role="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Политика конфиденциальности CityParking</h1>
+        <p>Этот документ описывает, какие данные собирает приложение, с какой целью они используются, кому передаются и как вы можете управлять их обработкой.</p>
+        <a class="cta" href="#consent">Управление согласием</a>
+      </div>
+      <div class="card">
+        <h3>Кратко</h3>
+        <ul>
+          <li><strong>Данные:</strong> местоположение, устройство, диагностика.</li>
+          <li><strong>Цели:</strong> навигация к парковкам, улучшение стабильности.</li>
+          <li><strong>Хранение:</strong> минимально необходимое и ограниченное по времени.</li>
+          <li><strong>Контакты:</strong> <a href="mailto:al.fedor3nko@gmail.com">al.fedor3nko@gmail.com</a></li>
+        </ul>
+      </div>
+    </section>
 
-    <h2>2. Какие данные мы собираем и для каких целей</h2>
-    <h3>Категории собираемых данных</h3>
-    <p><strong>Данные местоположения:</strong> точное или приблизительное местоположение устройства для поиска парковок, навигации и управления сессиями парковки.</p>
-    <p><strong>Идентификаторы устройства:</strong> уникальные идентификаторы, модель, версия ОС, идентификаторы рекламных трекеров для аналитики и диагностики.</p>
-    <p><strong>Контактные данные:</strong> имя, e‑mail, телефон (если вы регистрируетесь или связываетесь со службой поддержки).</p>
-    <p><strong>Платёжные данные:</strong> обрабатываются через сторонних платёжных провайдеров; мы не храним полные данные карт на своих серверах.</p>
-    <p><strong>Логи и диагностика:</strong> журналы ошибок, статистика использования.</p>
-    <p><strong>Данные, загружаемые пользователем:</strong> фотографии, отзывы, комментарии.</p>
+    <!-- Разметка: оглавление + контент -->
+    <div class="layout">
+      <aside class="toc" aria-label="Оглавление">
+        <h3>Навигация по разделам</h3>
+        <ul>
+          <li><a href="#scope">Область действия</a></li>
+          <li><a href="#data">Какие данные мы собираем</a></li>
+          <li><a href="#use">Как мы используем данные</a></li>
+          <li><a href="#share">Передача третьим лицам</a></li>
+          <li><a href="#storage">Хранение и защита</a></li>
+          <li><a href="#rights">Права пользователей</a></li>
+          <li><a href="#consent">Согласие и настройки</a></li>
+          <li><a href="#children">Дети</a></li>
+          <li><a href="#changes">Изменения политики</a></li>
+          <li><a href="#contacts">Контакты разработчика</a></li>
+        </ul>
+      </aside>
 
-    <h2>3. Передача третьим лицам и сроки хранения</h2>
-    <p><strong>Платёжные провайдеры:</strong> для обработки платежей; передаём только необходимые данные.</p>
-    <p><strong>Поставщики аналитики и мониторинга:</strong> для анонимной статистики и диагностики.</p>
-    <p><strong>Поставщики хостинга и бэкапов:</strong> для хранения и резервного копирования.</p>
-    <p><strong>Сроки хранения:</strong> данные аккаунта — до удаления аккаунта + 90 дней для резервных копий; логи — до 12 месяцев; платёжные записи — в соответствии с платёжным провайдером и законодательством.</p>
+      <article class="content">
+        <section id="scope" class="section" aria-labelledby="scope-title">
+          <h2 id="scope-title">Область действия</h2>
+          <p>Эта политика распространяется на приложение CityParking, публикуемое ZaharCompany, и связанные сервисы, которые используются для его работы. Политика применяется ко всем пользователям приложения вне зависимости от страны проживания.</p>
+          <div class="note">
+            <span aria-hidden="true">ℹ️</span>
+            <div>Если вы используете сторонние функции (например, карты), применяются правила соответствующих поставщиков в части обработки данных.</div>
+          </div>
+        </section>
 
-    <h2>4. Безопасность</h2>
-    <p>Мы применяем технические и организационные меры: шифрование при передаче (TLS), ограничение доступа по ролям, резервные копии, регулярные обновления и мониторинг безопасности.</p>
+        <section id="data" class="section" aria-labelledby="data-title">
+          <h2 id="data-title">Какие данные мы собираем</h2>
+          <div class="grid">
+            <div class="panel">
+              <h3>Местоположение</h3>
+              <p class="muted">Геолокация для определения ближайших парковочных зон и маршрутов.</p>
+              <ul>
+                <li><strong>Тип:</strong> GPS/агрегированная геопозиция</li>
+                <li><strong>Режим:</strong> только при активном использовании функций карты</li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Диагностика</h3>
+              <p class="muted">Логи ошибок и статистика производительности для улучшения работы приложения.</p>
+              <ul>
+                <li><strong>Тип:</strong> события сбоев, версия ОС/приложения</li>
+                <li><strong>Анонимизация:</strong> где возможно</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-    <h2>5. Права пользователя</h2>
-    <p>Вы имеете право на доступ, исправление, удаление, ограничение обработки, переносимость данных и отзыв согласия. Для реализации прав свяжитесь: <a href="mailto:al.fedor3nko@gmail.com">al.fedor3nko@gmail.com</a>.</p>
+        <section id="use" class="section" aria-labelledby="use-title">
+          <h2 id="use-title">Как мы используем данные</h2>
+          <ul>
+            <li><strong>Навигация:</strong> показ доступных парковок и построение маршрутов.</li>
+            <li><strong>Качество:</strong> анализ производительности и устранение ошибок.</li>
+            <li><strong>Коммуникации:</strong> ответы на обращения пользователей.</li>
+          </ul>
+        </section>
 
-    <h2>6. Дополнительно</h2>
-    <p>Приложение не предназначено для детей младше 13 лет. Мы используем cookie и аналогичные технологии. Политика может обновляться; дата последнего обновления указана в начале документа.</p>
+        <section id="share" class="section" aria-labelledby="share-title">
+          <h2 id="share-title">Передача третьим лицам</h2>
+          <p>Мы не продаём ваши персональные данные. Передача может осуществляться поставщикам инфраструктуры и аналитики, строго в рамках предоставления услуг и по договорам обработки данных.</p>
+        </section>
 
-    <footer>
-      Если у вас есть вопросы по обработке персональных данных — напишите на <a href="mailto:al.fedor3nko@gmail.com">al.fedor3nko@gmail.com</a>.
-    </footer>
-  </div>
+        <section id="storage" class="section" aria-labelledby="storage-title">
+          <h2 id="storage-title">Хранение и защита</h2>
+          <ul>
+            <li><strong>Минимизация:</strong> храним только необходимое и ограниченный срок.</li>
+            <li><strong>Защита:</strong> технические и организационные меры безопасности.</li>
+            <li><strong>Доступ:</strong> ограничен уполномоченными лицами.</li>
+          </ul>
+        </section>
+
+        <section id="rights" class="section" aria-labelledby="rights-title">
+          <h2 id="rights-title">Права пользователей</h2>
+          <ul>
+            <li><strong>Доступ:</strong> запросить копию данных.</li>
+            <li><strong>Исправление:</strong> обновить или скорректировать данные.</li>
+            <li><strong>Удаление:</strong> потребовать удаление, если это не противоречит закону.</li>
+            <li><strong>Отзыв согласия:</strong> изменить настройки доступа к данным.</li>
+          </ul>
+        </section>
+
+        <section id="consent" class="section" aria-labelledby="consent-title">
+          <h2 id="consent-title">Согласие и настройки</h2>
+          <p>Вы можете управлять разрешениями в настройках устройства: <span class="kbd">Настройки → Приложения → CityParking → Разрешения</span>. Отключение разрешений может ограничить функциональность приложения.</p>
+        </section>
+
+        <section id="children" class="section" aria-labelledby="children-title">
+          <h2 id="children-title">Дети</h2>
+          <p>Приложение не предназначено для детей младше 13 лет. Мы не собираем осознанно данные о детях. Если вы считаете, что ребёнок предоставил нам данные, свяжитесь с нами для их удаления.</p>
+        </section>
+
+        <section id="changes" class="section" aria-labelledby="changes-title">
+          <h2 id="changes-title">Изменения политики</h2>
+          <p>Мы можем периодически обновлять эту политику. Дата последнего обновления будет указана ниже; существенные изменения доводятся через обновление приложения или уведомления.</p>
+          <p class="muted">Дата обновления: 25 декабря 2025</p>
+        </section>
+
+        <section id="contacts" class="section" aria-labelledby="contacts-title">
+          <h2 id="contacts-title">Контакты разработчика</h2>
+          <p><strong>ZaharCompany</strong><br>
+             Gomel, Belarus (BY)<br>
+             Email: <a href="mailto:al.fedor3nko@gmail.com">al.fedor3nko@gmail.com</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- Нижний колонтитул -->
+  <footer class="footer" role="contentinfo">
+    <div class="inner">
+      <div class="small">© ZaharCompany — CityParking. Все права защищены.</div>
+      <div class="small">Политика конфиденциальности • Версия 1.0</div>
+    </div>
+  </footer>
 </body>
 </html>
